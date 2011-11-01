@@ -545,13 +545,13 @@ Value name_list(const Array& params, bool fHelp)
                 string strAddress = "";
                 GetNameAddress(txPos, strAddress);
                 oName.push_back(Pair("address", strAddress));
-                if(nHeight + GetDisplayExpirationDepth(nHeight) - pindexBest->nHeight <= 0)
+                if(nHeight + GetDisplayExpirationDepth(pindexBest->nHeight) - pindexBest->nHeight <= 0)
                 {
                     oName.push_back(Pair("expired", 1));
                 }
                 else
                 {
-                    oName.push_back(Pair("expires_in", nHeight + GetDisplayExpirationDepth(nHeight) - pindexBest->nHeight));
+                    oName.push_back(Pair("expires_in", nHeight + GetDisplayExpirationDepth(pindexBest->nHeight) - pindexBest->nHeight));
                 }
                 oRes.push_back(oName);
             }
@@ -668,13 +668,13 @@ Value name_history(const Array& params, bool fHelp)
                 string strAddress = "";
                 GetNameAddress(txPos, strAddress);
                 oName.push_back(Pair("address", strAddress));
-                if(nHeight + GetDisplayExpirationDepth(nHeight) - pindexBest->nHeight <= 0)
+                if(nHeight + GetDisplayExpirationDepth(pindexBest->nHeight) - pindexBest->nHeight <= 0)
                 {
                     oName.push_back(Pair("expired", 1));
                 }
                 else
                 {
-                    oName.push_back(Pair("expires_in", nHeight + GetDisplayExpirationDepth(nHeight) - pindexBest->nHeight));
+                    oName.push_back(Pair("expires_in", nHeight + GetDisplayExpirationDepth(pindexBest->nHeight) - pindexBest->nHeight));
                 }
                 oRes.push_back(oName);
             }
@@ -724,7 +724,7 @@ Value name_scan(const Array& params, bool fHelp)
         uint256 hash;
         if (txPos.IsNull() ||
             !GetValueOfTxPos(txPos, vchValue, hash, nHeight) ||
-            (GetValueOfTxPos(txPos, vchValue, hash, nHeight) && nHeight + GetDisplayExpirationDepth(nHeight) - pindexBest->nHeight <= 0))
+            (GetValueOfTxPos(txPos, vchValue, hash, nHeight) && nHeight + GetDisplayExpirationDepth(pindexBest->nHeight) - pindexBest->nHeight <= 0))
         {
             oName.push_back(Pair("expired", 1));
         }
@@ -736,7 +736,7 @@ Value name_scan(const Array& params, bool fHelp)
             string strAddress = "";
             GetNameAddress(txPos, strAddress);
             oName.push_back(Pair("address", strAddress));
-            oName.push_back(Pair("expires_in", nHeight + GetDisplayExpirationDepth(nHeight) - pindexBest->nHeight));
+            oName.push_back(Pair("expires_in", nHeight + GetDisplayExpirationDepth(pindexBest->nHeight) - pindexBest->nHeight));
         }
         oRes.push_back(oName);
     }
